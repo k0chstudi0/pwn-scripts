@@ -65,7 +65,7 @@ def run_sleep(sec):
 def run_nmap_initial_tcp_all(ip):
     global hosts_information
     global processes_information
-    command = f"nmap -sS -p- -oA {hosts_information[ip][IDENTIFIER_DIRECTORY]}/{IDENTIFIER_NMAP_OUTPUT_INITIAL_TCP_ALL} {ip}"
+    command = f"nmap -sS -Pn -p- -oA {hosts_information[ip][IDENTIFIER_DIRECTORY]}/{IDENTIFIER_NMAP_OUTPUT_INITIAL_TCP_ALL} {ip}"
     options = ["-sS", "-p-"]
     output_file = hosts_information[ip][IDENTIFIER_DIRECTORY] + "/" + IDENTIFIER_NMAP_OUTPUT_INITIAL_TCP_ALL
     process = run_nmap_scan(ip, options, output_file)
@@ -82,7 +82,7 @@ def run_nmap_initial_tcp_service(ip):
     open_ports = get_open_ports_from_nmap_xml(output_file)
     open_ports_string = ",".join(open_ports)
     open_ports_option = "-p" + open_ports_string
-    command = f"nmap -sS {open_ports_option} -sC -sV -oA {hosts_information[ip][IDENTIFIER_DIRECTORY]}/{IDENTIFIER_NMAP_OUTPUT_INITIAL_TCP_SERVICES} {ip}"
+    command = f"nmap -sS {open_ports_option} -Pn -sC -sV -oA {hosts_information[ip][IDENTIFIER_DIRECTORY]}/{IDENTIFIER_NMAP_OUTPUT_INITIAL_TCP_SERVICES} {ip}"
     options = ["-sS", open_ports_option, "-sC", "-sV"]
     output_file = hosts_information[ip][IDENTIFIER_DIRECTORY] + "/" + IDENTIFIER_NMAP_OUTPUT_INITIAL_TCP_SERVICES
     process = run_nmap_scan(ip, options, output_file)
@@ -94,7 +94,7 @@ def run_nmap_initial_tcp_service(ip):
 def run_nmap_initial_udp_all(ip):
     global hosts_information
     global processes_information
-    command = f"nmap -sU -oA {hosts_information[ip][IDENTIFIER_DIRECTORY]}/{IDENTIFIER_NMAP_OUTPUT_INITIAL_UDP_ALL} {ip}"
+    command = f"nmap -sU -Pn -oA {hosts_information[ip][IDENTIFIER_DIRECTORY]}/{IDENTIFIER_NMAP_OUTPUT_INITIAL_UDP_ALL} {ip}"
     options = ["-sU"]
     output_file = hosts_information[ip][IDENTIFIER_DIRECTORY] + "/" + IDENTIFIER_NMAP_OUTPUT_INITIAL_UDP_ALL
     process = run_nmap_scan(ip, options, output_file)
